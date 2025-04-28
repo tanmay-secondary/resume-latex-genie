@@ -1,0 +1,115 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  :root {
+    --primary: #2f0808;
+    --secondary: #3b1314;
+    --accent: #f5efef;
+    --background: #ffffff;
+    --text: #000000;
+  }
+
+  body, html {
+    @apply h-full font-['Poppins'] bg-background scroll-smooth m-0 p-0;
+  }
+
+  * {
+    @apply box-border;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .navbar {
+    @apply flex justify-between items-center px-8 py-5 fixed top-0 w-full z-10 shadow-md;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+  }
+
+  .navbar ul {
+    @apply flex list-none gap-8;
+  }
+
+  .navbar li a {
+    @apply text-white no-underline font-medium text-base transition-all duration-300 px-4 py-2 rounded-[20px] hover:bg-white/10;
+  }
+
+  .logo {
+    @apply text-white text-[1.8rem] font-semibold tracking-wider;
+  }
+
+  .hero {
+    @apply flex h-screen relative overflow-hidden;
+  }
+
+  .image-container {
+    @apply flex w-full h-full;
+  }
+
+  .image-container img {
+    @apply w-1/2 h-full object-cover transition-transform duration-500 hover:scale-102;
+  }
+
+  .text-overlay {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white z-[2] 
+           bg-[rgba(47,8,8,0.85)] p-8 md:p-12 rounded-[15px] backdrop-blur-md shadow-lg;
+  }
+
+  .text-overlay h1 {
+    @apply text-4xl md:text-[3.5rem] mb-4 uppercase tracking-wider;
+  }
+
+  .text-overlay span {
+    @apply block text-4xl md:text-[3.5rem] font-bold;
+    background: linear-gradient(45deg, #fff, #f5efef);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-overlay p {
+    @apply my-4 text-lg md:text-xl text-[#f5efef] font-light;
+  }
+
+  .learn-more {
+    @apply inline-block mt-6 px-8 py-4 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]
+           text-white no-underline font-medium rounded-[25px] transition-all duration-300
+           border-2 border-transparent hover:bg-transparent hover:border-[var(--primary)] hover:-translate-y-1;
+  }
+}
+
+/* Responsive styles */
+@layer utilities {
+  @media (max-width: 768px) {
+    .navbar {
+      @apply px-4;
+    }
+
+    .text-overlay {
+      @apply w-[90%] p-6;
+    }
+
+    .text-overlay h1,
+    .text-overlay span {
+      @apply text-[2.5rem];
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar ul {
+      @apply gap-4;
+    }
+
+    .text-overlay h1,
+    .text-overlay span {
+      @apply text-2xl;
+    }
+
+    .text-overlay p {
+      @apply text-base;
+    }
+  }
+}
