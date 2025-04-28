@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermiQ - Skin Detection</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+        header {
+            background-color: #3b1314;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav .logo {
+            color: white;
+            font-size: 24px;
+        }
+        
+        /* Content Container */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #efded6;
+        }
+        
+        /* Column Styling */
+        .left, .center, .right {
+            background-color: #f5e0d6;
+            padding: 15px;
+            width: 30%;
+            animation: slideIn 2s forwards;
+        }
+        .center h3, .right h3 {
+            color: #5b2c27;
+        }
+        .left p, .center p {
+            color: #4b3833;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .step {
+            text-align: center;
+            font-size: 14px;
+            animation: fadeIn 3s;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+        </ul>
+        <h1 class="logo">DermiQ</h1>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="left">
+        <!-- Image Placeholder to be updated dynamically -->
+        <img id="uploadedImage" src="placeholder.jpg" alt="Uploaded Image">
+        <p id="diseaseDescription">Description of the detected skin disease...</p>
+    </div>
+    <div class="center">
+        <h3>Name: Shrushti Patil</h3>
+        <p>Age: 29<br>Gender: Female<br>Disease Detected: <span id="detectedDisease">Skin Disease</span></p>
+        <h3>Home Remedies:</h3>
+        <ul id="remediesList">
+            <li>Tea Tree Oil: Dilute with carrier oil, apply to affected areas.</li>
+        </ul>
+    </div>
+    <div class="right">
+        <h3>Recommended Products:</h3>
+        <div>
+            <img src="Cleansing Oil.jpg" alt="Cleansing Oil">
+            <p class="step">Step 1: Cleansing Oil</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set values retrieved from localStorage or server response
+    const uploadedImage = localStorage.getItem('uploadedImage');
+    const diseasePrediction = localStorage.getItem('predictedDisease');
+    const diseaseDescription = localStorage.getItem('diseaseDescription');
+    const homeRemedies = localStorage.getItem('homeRemedies');
+
+    if (uploadedImage) {
+        document.getElementById('uploadedImage').src = uploadedImage;
+    }
+
+    if (diseasePrediction) {
+        document.getElementById('detectedDisease').textContent = diseasePrediction;
+    }
+
+    if (diseaseDescription) {
+        document.getElementById('diseaseDescription').textContent = diseaseDescription;
+    }
+
+    if (homeRemedies) {
+        const remediesList = JSON.parse(homeRemedies);
+        const remediesListElem = document.getElementById('remediesList');
+        remediesListElem.innerHTML = '';  // Clear default content
+        remediesList.forEach(remedy => {
+            const listItem = document.createElement('li');
+            listItem.textContent = remedy;
+            remediesListElem.appendChild(listItem);
+        });
+    }
+</script>
+
+</body>
+</html>
